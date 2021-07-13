@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useContext} from "react";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
+
 
 const Cart = (props) => {
   const cartItems = (
@@ -10,6 +11,7 @@ const Cart = (props) => {
       ))}
     </ul>
   );
+  
 
   return (
     <Modal onHideCartHandler={props.onHideCartHandler}>
