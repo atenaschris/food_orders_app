@@ -2,7 +2,7 @@ import React from "react";
 import mealsImage from "../../assets/asparagus.jpg";
 import HeaderCartbutton from "./HeaderCartButton";
 import classes from "./Header.module.css";
-import CartContext from "../../store/cart-content";
+
 
 const Header = (props) => {
   return (
