@@ -29,7 +29,6 @@ const cartReducer = (state, action) => {
       };
       updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
-      
     } else {
       updatedItems = state.items.concat(action.item);
     }
@@ -47,10 +46,10 @@ const cartReducer = (state, action) => {
     );
     console.log(FoodToRemoveIndex);
     const FoodToRemove = state.items[FoodToRemoveIndex];
-      console.log(FoodToRemove);
-      const UpdatedFoodToRemove = {
-        ...FoodToRemove,
-        amount: FoodToRemove.amount - 1,
+    console.log(FoodToRemove);
+    const UpdatedFoodToRemove = {
+      ...FoodToRemove,
+      amount: FoodToRemove.amount - 1,
     };
     console.log(UpdatedFoodToRemove);
     const updatedItems = [...state.items];
@@ -76,9 +75,6 @@ const cartReducer = (state, action) => {
     };
   }
 
-  
-  
-
   return defaultCartState;
 };
 
@@ -89,10 +85,7 @@ const CartProvider = (props) => {
   );
 
   const addItemToCartHandler = (item) => {
-
     dispatchCartAction({ type: "ADD", item: item });
-    
-    
   };
 
   const removeItemFromCartHandler = (id) => {
