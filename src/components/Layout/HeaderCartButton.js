@@ -5,11 +5,9 @@ import CartContext from "../../store/cart-content";
 
 const HeaderCartbutton = (props) => {
   const ctx = useContext(CartContext);
-  console.log(ctx.items);
   const totalAmountPerItem = ctx.items.reduce((t, n) => {
     return t + n.amount;
   }, 0);
-
   return (
     <button className={classes.button} onClick={props.onClick}>
       <span className={classes.icon}>
