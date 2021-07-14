@@ -14,18 +14,20 @@ const HeaderCartbutton = (props) => {
   const btnClasses = `${classes.button} ${btnIsAnimated ? classes.bump : ""}`;
 
   useEffect(() => {
+    console.log('run');
     if (items.length === 0) {
       return;
     }
-    
-    setBtnIsAnimated(true);
-const timer = setTimeout(()=>{
-  setBtnIsAnimated(false);
-},300)
-   return ()=>{
-     clearTimeout(timer);
-   };
 
+    setBtnIsAnimated(true);
+    const timer = setTimeout(() => {
+      console.log('setting the timer')
+      setBtnIsAnimated(false);
+    }, 300);
+    return () => {
+      console.log('clear function running');
+      clearTimeout(timer);
+    };
   }, [items]);
   return (
     <button className={btnClasses} onClick={props.onClick}>

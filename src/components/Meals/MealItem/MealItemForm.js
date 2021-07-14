@@ -23,8 +23,6 @@ const MealItemForm = (props) => {
     props.onAddToCart(enteredAmountNumber);
   };
 
-
-
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
@@ -39,8 +37,13 @@ const MealItemForm = (props) => {
           defaultValue: "0",
         }}
       />
+
+      {amountError && (
+        <div>
+          <p className={classes.error}>Please enter a value between 1 and 5</p>
+        </div>
+      )}
       <button>+ Add</button>
-      {amountError && <p>Please enter a value between 1 and 5</p>}
     </form>
   );
 };

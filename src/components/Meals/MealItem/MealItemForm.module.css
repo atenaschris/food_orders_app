@@ -18,3 +18,8 @@
     background-color: #641e03;
     border-color: #8a2b06;
   }
+.error{
+  color: red;
+  margin-top: 0;
+  font-weight: bold;
+}
