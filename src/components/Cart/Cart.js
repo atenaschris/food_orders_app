@@ -31,12 +31,13 @@ const Cart = (props) => {
   );
 
   return (
-    <Modal onHideCartHandler={props.onHideCartHandler}>
+    <Modal onHideCartHandler={props.onHideCartHandler} >
       {hasItems && cartItems}
-      <div className={classes.total}>
+      {hasItems ? <div className={classes.total}>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
-      </div>
+      </div> : <p className={classes['alert-message']}>Please select at least one food</p> }
+      
       <div className={classes.actions}>
         <button
           className={classes["button--alt"]}

@@ -1,70 +1,10 @@
-# Getting Started with Create React App
+# Food Orders App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is about a food order app. Users can order meals from a list of available meals, set the quantity the want to order. The ordered meals will be pushed into a cart, where users will se all the ordered products, with the amount selected as well as the price of each food and last but not least the total amount. Obviously, the cart contains the list of meals ordered and two buttons: the first one closes the Cart(which is a modal), the second one will lately send a request to a backend server to store the data.
+In the cart users can either increase the amount of the selected food by one and decrease it by the same quantity. If there are no items in the cart, then a message is displayed which invite users to order at least one meal to see the total amount. In this project I used a lot of interesting features, such as  hooks(useEffect,useReducer,useRef,useState): All the cart logic is managed by a CartContext and a CartReducer (regarding the foods, the functions which should be triggered when the user will order a food, as well as the case when the user will decrease the amount of the selected food by one.). Then I use the useRef hook to read the value of the input I use in the single item of the displayed availables food and, since input is a custom component, I use the forwardRef to forward the ref from the custom input component to the input element (whick is the input object in the tree dom.).Another interesting fronted feature is a bump animation when something changes in the cartContext, which is the length of the items. In the navbar button (where I display the total amount of foods the user selected) I add a class .bump conditionally, using the useEffect hook: when the length changes (so when an interaction of the user add the amount to the cart, or increases the amount by one and so on...) ; then I add a bump class conditionally(using a state true/false) and after a certain time (using a timeout function inside of the useEffect hook) , I make sure to clean this timeout where I basically change the state: if the variable whick holds the state is true, I add the class, otherwise I don't. Make sure to take a look at this application and.... enjoy! 
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

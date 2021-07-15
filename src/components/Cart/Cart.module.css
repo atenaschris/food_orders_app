@@ -44,4 +44,9 @@
     background-color: #8a2b06;
     color: white;
   }
+
+  .alert-message{
+    color: red;
+    font-weight: bold;
+  }
   
