@@ -7,6 +7,12 @@
   margin: 1rem 0;
 }
 
+ @media screen and (max-width:417px){
+  .cart-item{
+    flex-direction: column;
+  }
+} 
+
 .cart-item h2 {
   margin: 0 0 0.5rem 0;
   color: #363636;
@@ -34,14 +40,14 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-@media (min-width: 768px) {
+ @media (max-width: 417px) {
   .actions {
-    flex-direction: row;
+    margin-top: 1rem;
   }
-}
+} 
 
 .cart-item button {
   font: inherit;

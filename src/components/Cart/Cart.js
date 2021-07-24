@@ -7,13 +7,13 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
   const ctx = useContext(CartContext);
   const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
-  const hasItems = ctx.items.length > 0;  
+  const hasItems = ctx.items.length > 0;
 
   const addAmountToFoodHandler = (food) => {
-    ctx.addItem({...food,amount:1});
+    ctx.addItem({ ...food, amount: 1 });
   };
   const removeAmountToFoodHandler = (id) => {
-    ctx.removeItem(id)
+    ctx.removeItem(id);
   };
   const cartItems = (
     <ul className={classes["cart-items"]}>
@@ -31,13 +31,19 @@ const Cart = (props) => {
   );
 
   return (
-    <Modal onHideCartHandler={props.onHideCartHandler} >
+    <Modal onHideCartHandler={props.onHideCartHandler}>
       {hasItems && cartItems}
-      {hasItems ? <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
-      </div> : <p className={classes['alert-message']}>Please select at least one food</p> }
-      
+      {hasItems ? (
+        <div className={classes.total}>
+          <span>Total Amount</span>
+          <span>{totalAmount}</span>
+        </div>
+      ) : (
+        <p className={classes["alert-message"]}>
+          Please select at least one food
+        </p>
+      )}
+
       <div className={classes.actions}>
         <button
           className={classes["button--alt"]}

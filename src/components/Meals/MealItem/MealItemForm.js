@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import Input from "../../UI/Input";
 import classes from "./MealItemForm.module.css";
 
@@ -6,12 +6,67 @@ const MealItemForm = (props) => {
   const amountRef = useRef();
   const [amountError, setAmounterror] = useState(false);
 
+  const defaultAmountState = {
+    amount: 0,
+    error: undefined,
+    isTouched: undefined,
+  };
+
+  const amountReducer = (state, action) => {
+    if (action.type === "SET_AMOUNT") {
+      return {
+        amount: action.val,
+        error:
+          action.val.trim() === "" ||
+          +action.val.trim() <= 0 ||
+          +action.val.trim() > 5,
+        isTouched: true,
+      };
+    }
+
+    if (action.type === "BLUR_AMOUNT") {
+      return {
+        amount: state.amount,
+        error:
+          state.amount.trim() === "" ||
+          +state.amount <= 0 ||
+          state.amount.trim() > 5,
+        isTouched: true,
+      };
+    }
+
+    return defaultAmountState;
+  };
+
+  const [amountState, dispatchAmountState] = useReducer(
+    amountReducer,
+    defaultAmountState
+  );
+
+  const { amount, error, isTouched } = amountState;
+
+  let formIsValid = false;
+  if (!error && amount !==0 ) {
+    formIsValid = true;
+  }
+
+  console.log(amountError);
+
+  const changeAmountHandler = (event) => {
+    dispatchAmountState({ type: "SET_AMOUNT", val: event.target.value });
+  };
+
+  const blurAmountHandler = () => {
+    dispatchAmountState({ type: "BLUR_AMOUNT" });
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    const enteredAmount = amountRef.current.value;
-    const enteredAmountNumber = +enteredAmount;
 
-    if (
+    /*  const enteredAmount = amountRef.current.value;
+    const enteredAmountNumber = +enteredAmount; */
+
+    /* if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
       enteredAmountNumber > 5
@@ -19,22 +74,32 @@ const MealItemForm = (props) => {
       setAmounterror(true);
       return;
     }
-    setAmounterror(false);
-    props.onAddToCart(enteredAmountNumber);
+    setAmounterror(false); */
+    props.onAddToCart(+amount);
   };
+
+  useEffect(() => {
+    console.log("running");
+    const timeout = setTimeout(() => {
+      setAmounterror(error && isTouched);
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [error, isTouched]);
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
-        ref={amountRef}
+        /* ref={amountRef} */
         label="Amount"
         input={{
+          value: amount,
           id: "amount_" + props.id,
           type: "number",
-          min: "0",
-          max: "7",
-          step: "1",
-          defaultValue: "0",
+          onChange: changeAmountHandler,
+          onBlur: blurAmountHandler,
         }}
       />
 
@@ -43,7 +108,8 @@ const MealItemForm = (props) => {
           <p className={classes.error}>Please enter a value between 1 and 5</p>
         </div>
       )}
-      <button>+ Add</button>
+
+      <button disabled={!formIsValid}>+ Add</button>
     </form>
   );
 };

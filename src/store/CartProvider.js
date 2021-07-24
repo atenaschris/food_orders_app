@@ -57,7 +57,7 @@ const cartReducer = (state, action) => {
     updatedItems[FoodToRemoveIndex] = UpdatedFoodToRemove;
     console.log(updatedItems);
     const totalAmount = state.totalAmount - UpdatedFoodToRemove.price;
-    if (UpdatedFoodToRemove.amount <= 0) {
+    if (UpdatedFoodToRemove.amount === 0) {
       const filteredItems = updatedItems.filter(
         (food) => food.id !== UpdatedFoodToRemove.id
       );
@@ -79,6 +79,7 @@ const cartReducer = (state, action) => {
 };
 
 const CartProvider = (props) => {
+  
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState
@@ -100,9 +101,11 @@ const CartProvider = (props) => {
   };
 
   return (
+
     <CartContext.Provider value={CartContextValue}>
       {props.children}
     </CartContext.Provider>
+    
   );
 };
 
