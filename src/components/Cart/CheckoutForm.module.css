@@ -1,0 +1,52 @@
+.checkout-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.button {
+  font: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #8a2b06;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+}
+
+.button:hover,
+.button:active {
+  background-color: #5a1a01;
+  border-color: #5a1a01;
+  color: white;
+}
+
+.button-send {
+  background-color: #5a1a01;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 20px 20px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #522b1c;
+  cursor: not-allowed;
+}
+
+.checkout-form {
+  margin-top: 2rem;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input label{
+  margin-bottom: 10px;
+}
+
+.input input {
+  width: 15rem;
+}

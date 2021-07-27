@@ -1,9 +1,8 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Input from "../../UI/Input";
 import classes from "./MealItemForm.module.css";
 
 const MealItemForm = (props) => {
-  const amountRef = useRef();
   const [amountError, setAmounterror] = useState(false);
 
   const defaultAmountState = {
@@ -46,11 +45,11 @@ const MealItemForm = (props) => {
   const { amount, error, isTouched } = amountState;
 
   let formIsValid = false;
-  if (!error && amount !==0 ) {
+  if (!error && amount !== 0) {
     formIsValid = true;
   }
 
-  console.log(amountError);
+  
 
   const changeAmountHandler = (event) => {
     dispatchAmountState({ type: "SET_AMOUNT", val: event.target.value });
@@ -63,18 +62,6 @@ const MealItemForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    /*  const enteredAmount = amountRef.current.value;
-    const enteredAmountNumber = +enteredAmount; */
-
-    /* if (
-      enteredAmount.trim().length === 0 ||
-      enteredAmountNumber < 1 ||
-      enteredAmountNumber > 5
-    ) {
-      setAmounterror(true);
-      return;
-    }
-    setAmounterror(false); */
     props.onAddToCart(+amount);
   };
 
@@ -92,7 +79,8 @@ const MealItemForm = (props) => {
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
-        /* ref={amountRef} */
+      className = {classes.input}
+      isValid = {amountError}
         label="Amount"
         input={{
           value: amount,
@@ -100,6 +88,7 @@ const MealItemForm = (props) => {
           type: "number",
           onChange: changeAmountHandler,
           onBlur: blurAmountHandler,
+          min:0,
         }}
       />
 
