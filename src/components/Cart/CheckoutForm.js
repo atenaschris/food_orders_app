@@ -59,7 +59,7 @@ const Checkoutform = (props) => {
     formIsValid = true;
   }
 
-  const submitHandler = async (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
     if (!formIsValid) {
       return;
@@ -87,7 +87,7 @@ const Checkoutform = (props) => {
     <Card className={classes["checkout-form"]}>
       <form onSubmit={submitHandler}>
         <Input
-        className={classes.input}
+          className={classes.input}
           label="Name"
           isValid={nameHasError}
           input={{
@@ -146,11 +146,7 @@ const Checkoutform = (props) => {
 
         {cityCodeHasError && <ErrorInput message={errorMessage} />}
         <div className={classes["checkout-buttons"]}>
-          <button
-            onClick={props.onSendingDataHandler}
-            className={classes["button-send"]}
-            disabled={!formIsValid}
-          >
+          <button className={classes["button-send"]} disabled={!formIsValid}>
             {props.error ? "Try again" : "Send Data"}
           </button>
           <button
@@ -160,8 +156,6 @@ const Checkoutform = (props) => {
             Cancel
           </button>
         </div>
-
-       
       </form>
     </Card>
   );

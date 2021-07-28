@@ -15,10 +15,7 @@ const MealItemForm = (props) => {
     if (action.type === "SET_AMOUNT") {
       return {
         amount: action.val,
-        error:
-          action.val.trim() === "" ||
-          +action.val.trim() <= 0 ||
-          +action.val.trim() > 5,
+        error: +action.val.trim() <= 0 || +action.val.trim() > 5,
         isTouched: true,
       };
     }
@@ -26,10 +23,7 @@ const MealItemForm = (props) => {
     if (action.type === "BLUR_AMOUNT") {
       return {
         amount: state.amount,
-        error:
-          state.amount.trim() === "" ||
-          +state.amount <= 0 ||
-          state.amount.trim() > 5,
+        error: +state.amount <= 0 || state.amount.trim() > 5,
         isTouched: true,
       };
     }
@@ -48,8 +42,6 @@ const MealItemForm = (props) => {
   if (!error && amount !== 0) {
     formIsValid = true;
   }
-
-  
 
   const changeAmountHandler = (event) => {
     dispatchAmountState({ type: "SET_AMOUNT", val: event.target.value });
@@ -79,8 +71,8 @@ const MealItemForm = (props) => {
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
-      className = {classes.input}
-      isValid = {amountError}
+        className={classes.input}
+        isValid={amountError}
         label="Amount"
         input={{
           value: amount,
@@ -88,7 +80,7 @@ const MealItemForm = (props) => {
           type: "number",
           onChange: changeAmountHandler,
           onBlur: blurAmountHandler,
-          min:0,
+          min: 0,
         }}
       />
 

@@ -28,7 +28,6 @@ const Cart = (props) => {
   };
 
   const fetchUsersItemsHandler = async (user) => {
-    /* setIsSubmitting(true); */
     const applyData = (user) => {
       console.log(user);
     };
@@ -44,7 +43,6 @@ const Cart = (props) => {
       applyData
     );
 
-   /*  setIsSubmitting(false); */
     setDidSubmit(true);
     ctx.clear();
   };
@@ -113,19 +111,27 @@ const Cart = (props) => {
 
   const isSubmittingModalContent = <p>Sending order data...</p>;
 
-  const didSubmitModalContent =<>
-  <p>Succesfully sent the order!!!</p>
-  <div  className={classes.actions}>
-  <button onClick={props.onHideCartHandler} >Close</button>
-  </div>
- 
-   </> 
+  const didSubmitModalContent = (
+    <>
+      <p>Succesfully sent the order!!!</p>
+      <div className={classes.actions}>
+        <button onClick={props.onHideCartHandler}>Close</button>
+      </div>
+    </>
+  );
 
-  return <Modal onHideCartHandler={props.onHideCartHandler}>
-    {!isLoading && !didSubmit && cartModalContent}
-    {isLoading && isSubmittingModalContent}
-    { !isLoading && didSubmit && didSubmitModalContent }
-  </Modal>;
+  const  didSubmitModalContentWithError= (
+    <p>{error}</p>
+  );
+
+  return (
+    <Modal onHideCartHandler={props.onHideCartHandler}>
+      {!isLoading && !didSubmit && cartModalContent}
+      {isLoading && isSubmittingModalContent}
+      {!isLoading && didSubmit && !error && didSubmitModalContent}
+      {!isLoading && didSubmit && error && didSubmitModalContentWithError}
+    </Modal>
+  );
 };
 
 export default Cart;
