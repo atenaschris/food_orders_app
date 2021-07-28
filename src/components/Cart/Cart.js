@@ -113,7 +113,7 @@ const Cart = (props) => {
 
   const didSubmitModalContent = (
     <>
-      <p>Succesfully sent the order!!!</p>
+      <p className={classes.success}>Succesfully sent the order!!!</p>
       <div className={classes.actions}>
         <button onClick={props.onHideCartHandler}>Close</button>
       </div>

@@ -1,16 +1,24 @@
 .input input {
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid maroon;
   font: inherit;
   margin-left: 0.5rem;
+}
+
+.input label{
+  color: maroon;
 }
 
 .input input:focus,
 .input input:active{
   outline: none;
-  background-color: rgb(224, 134, 134);
+  background-color: rgb(243, 193, 193);
 }
 
 .invalid input {
   border: 2px solid red ;
+}
+.invalid input:focus,
+.input input:active {
+background-color: rgba(255, 0, 0,0.6);
 }

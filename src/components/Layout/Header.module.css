@@ -32,4 +32,11 @@
     .header{
       flex-direction: column;
     }
+
+  }
+  
+  @media screen and (max-width:544px){
+    .header h1{
+      margin: 10px;
+    }
   }

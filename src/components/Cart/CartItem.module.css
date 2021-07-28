@@ -11,6 +11,10 @@
   .cart-item{
     flex-direction: column;
   }
+  .cart-item h2 {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
 } 
 
 .cart-item h2 {
