@@ -5,10 +5,10 @@ import CartContext from "../../store/cart-content";
 import CartItem from "./CartItem";
 import Checkoutform from "./CheckoutForm";
 import useHttp from "../../hooks/use-http";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Cart = (props) => {
   const [checkoutOpened, setCheckoutOpened] = useState(false);
-  /* const [isSubmitting, setIsSubmitting] = useState(false); */
   const [didSubmit, setDidSubmit] = useState(false);
   const ctx = useContext(CartContext);
   const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
@@ -17,21 +17,22 @@ const Cart = (props) => {
   const addAmountToFoodHandler = (food) => {
     ctx.addItem({ ...food, amount: 1 });
   };
+
   const removeAmountToFoodHandler = (id) => {
     ctx.removeItem(id);
   };
 
-  const { error, isLoading, sendRequest: fetchData } = useHttp();
+  const { error, isLoading, sendRequest: fetchUserData } = useHttp();
 
   const checkOutOpenedHandler = () => {
     setCheckoutOpened(true);
   };
 
-  const fetchUsersItemsHandler = async (user) => {
+  const fetchUsersItemsHandler = (user) => {
     const applyData = (user) => {
       console.log(user);
     };
-    fetchData(
+    fetchUserData(
       {
         url: "https://http-food-orders-app-default-rtdb.firebaseio.com/orders.json",
         method: "POST",
@@ -109,7 +110,7 @@ const Cart = (props) => {
     </>
   );
 
-  const isSubmittingModalContent = <p>Sending order data...</p>;
+  const isSubmittingModalContent = <div className="centered" ><LoadingSpinner/></div>;
 
   const didSubmitModalContent = (
     <>
@@ -120,9 +121,7 @@ const Cart = (props) => {
     </>
   );
 
-  const  didSubmitModalContentWithError= (
-    <p>{error}</p>
-  );
+  const didSubmitModalContentWithError = <p>{error}</p>;
 
   return (
     <Modal onHideCartHandler={props.onHideCartHandler}>

@@ -4,11 +4,12 @@ import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import useHttp from "../../hooks/use-http";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const AvailableMeals = () => {
   const [items, setItems] = useState([]);
 
-  const { isLoading, error, sendRequest: fetchData } = useHttp();
+  const { isLoading, error, sendRequest: fetchMealsData } = useHttp();
 
   useEffect(() => {
     console.log("Is Running");
@@ -26,15 +27,15 @@ const AvailableMeals = () => {
       setItems(objs);
     };
 
-    fetchData(
+    fetchMealsData(
       {
         url: "https://http-food-orders-app-default-rtdb.firebaseio.com/meals.json",
       },
       applyData
     );
-  }, [fetchData]);
+  }, [fetchMealsData]);
 
-  let mealsList = <p>No foods availables</p>;
+   let mealsList = <p>No foods availables</p>; 
 
   const hasItems = items.length > 0;
 
@@ -48,20 +49,21 @@ const AvailableMeals = () => {
         price={meal.price}
       />
     ));
-  }
+  } 
 
   if (error) {
     mealsList = <p>{error}</p>;
   }
 
   if (isLoading) {
-    mealsList = <p>Loading.....</p>;
+    mealsList = <LoadingSpinner/>;
   }
 
   return (
     <section className={classes.meals}>
+     
       <Card>
-        <ul>{mealsList}</ul>
+        { <ul> {mealsList}</ul> }
       </Card>
     </section>
   );
