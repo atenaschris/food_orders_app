@@ -19,7 +19,7 @@
     list-style: none;
     width: 100%;
     justify-content: space-around;
-    align-items: center;
+    align-items: baseline;
   }
 
   header ul li a{
@@ -46,15 +46,21 @@
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
   }
 
-  @media screen and (max-width:545px){
+  @media screen and (max-width:761px){
     .header{
       flex-direction: column;
     }
 
-  }
-  
-  @media screen and (max-width:544px){
     .header h1{
       margin: 10px;
     }
+
+    .header ul {
+      margin: 10px 10px 15px 10px;
+    }
+
   }
+  
+  /* @media screen and (max-width:544px){
+    
+  } */

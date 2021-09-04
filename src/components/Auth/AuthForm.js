@@ -1,15 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useContext } from "react";
 
 import classes from "./AuthForm.module.css";
-import Card from "../components/UI/Card";
+import Card from "../UI/Card";
 
-import useHttp from "../hooks/use-http";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
+import useHttp from "../../hooks/use-http";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 import { useHistory } from "react-router";
 
+import authContext from "../../store/auth-context";
+
 const Authform = () => {
   const [login, setLogin] = useState(false);
+
+  const Authctx = useContext(authContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -39,9 +43,10 @@ const Authform = () => {
     }
 
     const transformData = (data) => {
-      //should pass the data to the context
-      history.replace('/');
-      
+
+      Authctx.loginHandler(data.idToken);
+     
+      history.replace("/");
     };
 
     authenticateUser(

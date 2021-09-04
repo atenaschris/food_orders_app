@@ -2,15 +2,21 @@ import "./App.css";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import CartProvider from "./store/CartProvider";
 
 import { Switch, Redirect, Route } from "react-router-dom";
 
+import authContext from "./store/auth-context";
+
 import AuthPage from "./pages/AuthPage";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   const [cartIsShown, setCardIsShown] = useState(false);
+  const Authctx = useContext(authContext);
+
+  const {isLoggedIn} = Authctx;
   const showCartHandler = () => {
     setCardIsShown(true);
   };
@@ -30,10 +36,14 @@ function App() {
       </Route>
 
       <Route path="/auth">
-        <AuthPage/>
+        <AuthPage />
       </Route>
 
-      
+      <Route path="/profile">
+        {isLoggedIn &&  <UserProfile /> }
+        {!isLoggedIn && <Redirect to="/auth" />}
+       
+      </Route>
 
       <Route path="*">
         <Redirect to="/" />

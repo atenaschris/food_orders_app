@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./AuthPage.module.css";
 
-import AuthForm from "./AuthForm";
+import AuthForm from "../components/Auth/AuthForm";
 
 const AuthPage = () => {
   return (
