@@ -7,7 +7,6 @@
 .spinner:after {
   content: "";
   display: block;
-
   height: 64px;
   width: 64px;
   border-radius: 50%;

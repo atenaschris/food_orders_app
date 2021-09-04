@@ -35,7 +35,7 @@ const AvailableMeals = () => {
     );
   }, [fetchMealsData]);
 
-   let mealsList = <p>No foods availables</p>; 
+  let mealsList = <p>No foods availables</p>;
 
   const hasItems = items.length > 0;
 
@@ -49,22 +49,19 @@ const AvailableMeals = () => {
         price={meal.price}
       />
     ));
-  } 
+  }
 
   if (error) {
     mealsList = <p>{error}</p>;
   }
 
   if (isLoading) {
-    mealsList = <LoadingSpinner/>;
+    mealsList = <LoadingSpinner />;
   }
 
   return (
     <section className={classes.meals}>
-     
-      <Card>
-        { <ul> {mealsList}</ul> }
-      </Card>
+      <Card>{<ul>{mealsList}</ul>}</Card>
     </section>
   );
 };

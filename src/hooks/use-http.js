@@ -14,6 +14,8 @@ const useHttp = () => {
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
 
+      console.log(response);
+
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
