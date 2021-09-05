@@ -4,19 +4,22 @@ import { useCallback } from "react";
 const authContext = React.createContext({
   token: "",
   isLoggedIn: false,
-  login: (idToken) => {},
-  logout: () => {},
+  loginHandler: (idToken) => {},
+  logoutHandler: () => {},
 });
 
 let DoneManuallyLogout;
 
 const calculateRemainingExpirationTime = (expiresData) => {
+  console.log(expiresData);
   const actualDateToMilliSeconds = new Date().getTime();
 
   const expiresDataConvertedToMilliSeconds = new Date(expiresData).getTime();
 
+  console.log(expiresDataConvertedToMilliSeconds);
+
   const remainingTimeToMilliSeconds =
-    actualDateToMilliSeconds + expiresDataConvertedToMilliSeconds;
+    expiresDataConvertedToMilliSeconds - actualDateToMilliSeconds;
 
   return remainingTimeToMilliSeconds;
 };
@@ -25,9 +28,15 @@ const retrieveInitialTokenAndRemainingDurationIfValid = () => {
   const initialToken = localStorage.getItem("Token");
   const expirationToken = localStorage.getItem("ExpirationDate");
 
+  console.log(expirationToken);
+
   const remainingDuration = calculateRemainingExpirationTime(expirationToken);
 
+  console.log(remainingDuration);
+
   if (remainingDuration <= 60000) {
+    localStorage.removeItem("Token");
+    localStorage.removeItem("ExpirationDate");
     return null;
   }
 
@@ -40,10 +49,10 @@ const retrieveInitialTokenAndRemainingDurationIfValid = () => {
 export const AuthContextProvider = (props) => {
   const initialTokenAndDuration =
     retrieveInitialTokenAndRemainingDurationIfValid();
-
-  const { initialToken } = initialTokenAndDuration;
-
-  const { remainingDuration } = initialTokenAndDuration;
+  let initialToken;
+  if (initialTokenAndDuration) {
+    initialToken = initialTokenAndDuration.initialToken;
+  }
 
   const [token, setToken] = useState(initialToken);
 
@@ -69,9 +78,13 @@ export const AuthContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(initialTokenAndDuration);
     if (initialTokenAndDuration) {
-        console.log(remainingDuration);
-      setTimeout(logoutHandler, remainingDuration);
+      console.log("heyy");
+      DoneManuallyLogout = setTimeout(
+        logoutHandler,
+        initialTokenAndDuration.remainingDuration
+      );
     }
   }, [initialTokenAndDuration, logoutHandler]);
 
