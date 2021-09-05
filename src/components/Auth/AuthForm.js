@@ -43,9 +43,20 @@ const Authform = () => {
     }
 
     const transformData = (data) => {
+      console.log(data.expiresIn);
 
-      Authctx.loginHandler(data.idToken);
-     
+      const actualDateInMilliseconds = new Date().getTime();
+
+      const expiresInFromSecondsToMilliseconds = +data.expiresIn * 1000;
+
+      const expireTimestamp = new Date(
+        actualDateInMilliseconds + expiresInFromSecondsToMilliseconds
+      );
+
+      const expireTimestampConvertedToString = expireTimestamp.toISOString();
+
+      Authctx.loginHandler(data.idToken, expireTimestampConvertedToString);
+
       history.replace("/");
     };
 

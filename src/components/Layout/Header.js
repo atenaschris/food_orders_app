@@ -32,7 +32,7 @@ const Header = (props) => {
           )}
           {isLoggedIn && (
             <li>
-              <button onClick={logoutHandler}>Logout</button>
+              <a className={classes['logout-anchor-tag']} onClick={logoutHandler}>Logout</a>
             </li>
           )}
         </ul>

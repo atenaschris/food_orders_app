@@ -1,66 +1,70 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #8a2b06;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 10%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #8a2b06;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.header ul {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+header ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.logout-anchor-tag{
+  cursor: pointer;
+  transition: 0.4s;
+}
+.logout-anchor-tag:hover{
+ color: rgb(131, 118, 118);
+}
+
+
+
+.main-image {
+  width: 100%;
+  height: 25rem;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.main-image img {
+  width: 110%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+}
+
+@media screen and (max-width: 761px) {
+  .header {
+    flex-direction: column;
   }
 
-  .header ul{
-    display: flex;
-    list-style: none;
-    width: 100%;
-    justify-content: space-around;
-    align-items: baseline;
+  .header h1 {
+    margin: 10px;
   }
 
-  header ul li a{
-    text-decoration: none;
-    color: white;
+  .header ul {
+    margin: 10px 10px 15px 10px;
   }
+}
 
-  header ul li a:visited{
-   
-    color: white;
-  }
-  
-  .main-image {
-    width: 100%;
-    height: 25rem;
-    z-index: 0;
-    overflow: hidden;
-  }
-  
-  .main-image img {
-    width: 110%;
-    height: 100%;
-    object-fit: cover;
-    transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
-  }
-
-  @media screen and (max-width:761px){
-    .header{
-      flex-direction: column;
-    }
-
-    .header h1{
-      margin: 10px;
-    }
-
-    .header ul {
-      margin: 10px 10px 15px 10px;
-    }
-
-  }
-  
-  /* @media screen and (max-width:544px){
+/* @media screen and (max-width:544px){
     
   } */
