@@ -1,18 +1,6 @@
 .form {
   text-align: right;
 }
-
-.form button:disabled {
-  cursor: not-allowed;
-  background-color: #8b4429;
-  border: 1px solid #220b01;
-}
-.form button:disabled:hover {
-  cursor: not-allowed;
-  background-color: #8b4429;
-  border: 1px solid #220b01;
-}
-
 .form button {
   font: inherit;
   cursor: pointer;
@@ -29,6 +17,19 @@
   background-color: #641e03;
   border-color: #8a2b06;
 }
+
+.form button:disabled {
+  cursor: not-allowed;
+  background-color: #8b4429;
+  border: 1px solid #220b01;
+}
+.form button:disabled:hover {
+  cursor: not-allowed;
+  background-color: #8b4429;
+  border: 1px solid #220b01;
+}
+
+
 .error {
   color: red;
   margin-top: 0;

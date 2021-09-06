@@ -1,4 +1,4 @@
-.control {
+/* .control {
   width: 30rem;
   margin-bottom: 1rem;
 }
@@ -23,16 +23,16 @@
   color: #000000;
   transition: 0.4s;
 }
-.actions a{
-    display: block;
-    font-size: small;
-    margin-top: 0.5rem;
-    cursor: pointer;
-    color: #844118;
-    transition: 0.5s;
+.actions a {
+  display: block;
+  font-size: small;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  color: #844118;
+  transition: 0.5s;
 }
-.actions a:hover{
-    letter-spacing: 2px;
+.actions a:hover {
+  letter-spacing: 2px;
 }
 .actions button:hover,
 .actions button:active {
@@ -40,4 +40,214 @@
   color: white;
   background-color: #844118;
 }
+ */
+.section {
+  position: relative;
+  min-height: 100vh;
+  background: maroon;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section .container {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  background: #fff;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
+.section .container .user {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.section .container .user .imgBx {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background-color: #ff0;
+  transition: 0.5s;
+}
+
+.section .container .user .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section .container .user .formBx {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  transition: 0.5s;
+}
+
+.section .container .user .formBx form h2 {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.section .container .user .formBx form input {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  background: #f5f5f5;
+  color: #333;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  margin: 8px 0px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.section .container .user .formBx form .signup {
+  position: relative;
+  margin-top: 20px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.section .container .user .formBx form button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #8a2b06;
+  border: 1px solid #220b01;
+  color: white;
+  padding: 0.25rem 2rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+.section .container .user .formBx form button:hover,
+.section .container .user .formBx form button:active {
+  background-color: #641e03;
+  border-color: #8a2b06;
+}
+
+.section .container .user .formBx form button:disabled {
+  cursor: not-allowed;
+  background-color: #8b4429;
+  border: 1px solid #220b01;
+}
+.section .container .user .formBx form button:disabled:hover {
+  cursor: not-allowed;
+  background-color: #8b4429;
+  border: 1px solid #220b01;
+}
+
+.section .container .user .formBx form .signup a {
+  font-weight: 900;
+  text-decoration: none;
+  color: #677eff;
+  cursor: pointer;
+}
+
+section .container .signupBx {
+  pointer-events: none;
+}
+
+section .container.active .signupBx {
+  pointer-events: initial;
+}
+
+section .container .signupBx .formBx {
+  left: 100%;
+}
+section .container.active .signupBx .formBx {
+  left: 0;
+}
+
+section .container .signupBx .imgBx {
+  left: -100%;
+}
+
+section .container.active .signupBx .imgBx {
+  left: 0;
+}
+section .container .signinBx .formBx {
+  left: 0;
+}
+section .container.active .signinBx .formBx {
+  left: 100%;
+}
+
+section .container .signinBx .imgBx {
+  left: 0;
+}
+
+section .container.active .signinBx .imgBx {
+  left: -100%;
+}
+
+@media (max-width: 991px) {
+  .section .container {
+    max-width: 400px;
+  }
+  .section .container .imgBx {
+    display: none;
+  }
+  .section .container .user .formBx {
+    width: 100%;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(248, 248, 248, 0.52),
+        rgba(15, 9, 14, 0.73)
+      ),
+      url("../../images/salmon.jpg");
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding: 20px;
+  }
+  .section .container.active .user .formBx {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(248, 248, 248, 0.52),
+        rgba(15, 9, 14, 0.73)
+      ),
+      url("../../images/hamburger.jpg");
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+  }
+  .section .container .user .formBx form .signup {
+    color: white;
+  }
+
+  .section .container .user .formBx form h2 {
+    color: white;
+  }
+}
+
+@media (max-width: 410px) {
+  /* .section .container .user.signinBx .formBx form {
+    margin-top: 
+  } */
+}
