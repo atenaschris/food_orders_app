@@ -10,7 +10,6 @@ import classes from "./CheckoutForm.module.css";
 import ErrorInput from "../UI/ErrorInput";
 
 const Checkoutform = (props) => {
-
   const isNotEmptyAndLessThan30Carachters = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
   };
@@ -77,7 +76,6 @@ const Checkoutform = (props) => {
     resetStreet();
     resetPostalCode();
     resetCityCode();
-    
   };
 
   const errorMessage =

@@ -1,9 +1,8 @@
-import React, { useState, useRef, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import salmon from "../../images/salmon.jpg";
 import hamburger from "../../images/hamburger.jpg";
 
 import classes from "./AuthForm.module.css";
-import Card from "../UI/Card";
 
 import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -11,32 +10,61 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import { useHistory } from "react-router";
 
 import authContext from "../../store/auth-context";
+import useForm from "../../hooks/use-form";
+import ErrorInput from "../UI/ErrorInput";
+import Input from "../UI/Input";
 
 const Authform = () => {
   const [login, setLogin] = useState(false);
 
   const Authctx = useContext(authContext);
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
-
   const { isLoading, error, sendRequest: authenticateUser } = useHttp();
+
+  const EmailIsValid = (value) => {
+    return value.trim() !== "" && value.trim().includes("@");
+  };
+
+  const PasswordIsValid = (value) => {
+    const regularExpression =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    return value.trim() !== "" && value.match(regularExpression);
+    /*  return value.trim() !== '' && value.trim().length < 30; */
+  };
+
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    error: emailHasError,
+    changeInputValue: changeEmailInputHandler,
+    blurInputValue: blurEmailInputHandler,
+    reset: resetEmailValue,
+  } = useForm((value) => EmailIsValid(value));
+
+  const {
+    value: passwordValue,
+    isValid: passwordIsValid,
+    error: passwordHasError,
+    changeInputValue: changePasswordInputHandler,
+    blurInputValue: blurPasswordInputHandler,
+    reset: resetPasswordValue,
+  } = useForm((value) => PasswordIsValid(value));
 
   const history = useHistory();
 
-  /*  const switchLoginHandler = () => {
-    setLogin((prevState) => !prevState);
-  }; */
+  let formIsValid = false;
 
   const switchSignInSignUpHandler = () => {
     setLogin((prevState) => !prevState);
+    resetEmailValue();
+    resetPasswordValue();
+
+    if (formIsValid) {
+    }
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-
-    const enteredEmail = emailRef.current.value;
-    const enteredPassword = passwordRef.current.value;
 
     let url;
 
@@ -72,18 +100,30 @@ const Authform = () => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: {
-          email: enteredEmail,
-          password: enteredPassword,
+          email: emailValue,
+          password: passwordValue,
           returnSecureToken: true,
         },
       },
       transformData
     );
+
+    resetEmailValue();
+    resetPasswordValue();
   };
 
   const containerClasses = `${classes.container} ${
     login ? classes.active : ""
   }`;
+
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+  const emailInputErrorMessage =
+    "the email field should not be empty and should contain at least the @ symbhol";
+
+  const passwordInputErrorMessage =
+    "the password field should not be empty and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
 
   return (
     <>
@@ -120,13 +160,56 @@ const Authform = () => {
               {error && <p>{error}</p>}
               <form>
                 <h2>Sign In</h2>
-                <input type="text" placeholder="UserName" ref={emailRef} />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  ref={passwordRef}
+
+                {/*  <input
+                  type="text"
+                   value={emailValue}
+                  onChange={changeEmailInputHandler}
+                  onBlur={blurEmailInputHandler}
+                /> */}
+                <Input
+                  label="Email"
+                  isValid={emailHasError}
+                  input={{
+                    id: `Email_${Math.random().toString()}`,
+                    value: emailValue,
+                    type: "text",
+                    onChange: changeEmailInputHandler,
+                    onBlur: blurEmailInputHandler,
+                  }}
                 />
-                {!isLoading && <button onClick={submitHandler}> Login </button>}
+
+                {emailHasError && (
+                  <ErrorInput message={emailInputErrorMessage} />
+                )}
+
+                {/* <input
+                  type="password"
+                  value={passwordValue}
+                  onChange={changePasswordInputHandler}
+                  onBlur={blurPasswordInputHandler}
+                /> */}
+                <Input
+                  label="Password"
+                  isValid={passwordIsValid}
+                  input={{
+                    id: `Password_${Math.random().toString()}`,
+                    value: passwordValue,
+                    type: "text",
+                    onChange: changePasswordInputHandler,
+                    onBlur: blurPasswordInputHandler,
+                  }}
+                />
+
+                {passwordHasError && (
+                  <ErrorInput message={passwordInputErrorMessage} />
+                )}
+                {!isLoading && (
+                  <button onClick={submitHandler} disabled={!formIsValid}>
+                    {" "}
+                    Login{" "}
+                  </button>
+                )}
                 {isLoading && <LoadingSpinner />}
 
                 <p className={classes.signup}>
@@ -137,24 +220,44 @@ const Authform = () => {
             </div>
           </div>
           <div className={`${classes.user} ${classes.signupBx}`}>
-            
             <div className={classes.formBx}>
               <form>
                 <h2>Create an account</h2>
-                <input
-                  type="text"
-                  name=""
-                  placeholder="UserName"
-                  ref={emailRef}
+                <Input
+                  label="Email"
+                  isValid={emailHasError}
+                  input={{
+                    id: `Email_${Math.random().toString()}`,
+                    value: emailValue,
+                    type: "text",
+                    onChange: changeEmailInputHandler,
+                    onBlur: blurEmailInputHandler,
+                  }}
                 />
-                <input
-                  type="password"
-                  name=""
-                  placeholder="Password"
-                  ref={passwordRef}
+
+                {emailHasError && (
+                  <ErrorInput message={emailInputErrorMessage} />
+                )}
+                <Input
+                  label="Password"
+                  isValid={passwordIsValid}
+                  input={{
+                    id: `Password_${Math.random().toString()}`,
+                    value: passwordValue,
+                    type: "text",
+                    onChange: changePasswordInputHandler,
+                    onBlur: blurPasswordInputHandler,
+                  }}
                 />
+
+                {passwordHasError && (
+                  <ErrorInput message={passwordInputErrorMessage} />
+                )}
                 {!isLoading && (
-                  <button onClick={submitHandler}> SignUp </button>
+                  <button onClick={submitHandler} disabled={!formIsValid}>
+                    {" "}
+                    SignUp{" "}
+                  </button>
                 )}
                 {isLoading && <LoadingSpinner />}
 

@@ -18,6 +18,7 @@
 .invalid input {
   border: 2px solid red ;
 }
+
 .invalid input:focus,
 .invalid input:active {
 background-color: rgba(255, 0, 0,0.6);
