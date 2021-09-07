@@ -12,7 +12,7 @@
 .input input:focus,
 .input input:active{
   outline: none;
-  background-color: rgb(243, 193, 193);
+  background-color: rgb(243, 193, 193) ;
 }
 
 .invalid input {
@@ -21,5 +21,7 @@
 
 .invalid input:focus,
 .invalid input:active {
-background-color: rgba(255, 0, 0,0.6);
+background-color: rgba(255, 0, 0,0.6) !important;
 }
+
+

@@ -29,7 +29,6 @@ const Authform = () => {
     const regularExpression =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     return value.trim() !== "" && value.match(regularExpression);
-    /*  return value.trim() !== '' && value.trim().length < 30; */
   };
 
   const {
@@ -161,12 +160,6 @@ const Authform = () => {
               <form>
                 <h2>Sign In</h2>
 
-                {/*  <input
-                  type="text"
-                   value={emailValue}
-                  onChange={changeEmailInputHandler}
-                  onBlur={blurEmailInputHandler}
-                /> */}
                 <Input
                   label="Email"
                   isValid={emailHasError}
@@ -178,20 +171,13 @@ const Authform = () => {
                     onBlur: blurEmailInputHandler,
                   }}
                 />
-
                 {emailHasError && (
                   <ErrorInput message={emailInputErrorMessage} />
                 )}
 
-                {/* <input
-                  type="password"
-                  value={passwordValue}
-                  onChange={changePasswordInputHandler}
-                  onBlur={blurPasswordInputHandler}
-                /> */}
                 <Input
                   label="Password"
-                  isValid={passwordIsValid}
+                  isValid={passwordHasError}
                   input={{
                     id: `Password_${Math.random().toString()}`,
                     value: passwordValue,
@@ -200,10 +186,10 @@ const Authform = () => {
                     onBlur: blurPasswordInputHandler,
                   }}
                 />
-
                 {passwordHasError && (
                   <ErrorInput message={passwordInputErrorMessage} />
                 )}
+
                 {!isLoading && (
                   <button onClick={submitHandler} disabled={!formIsValid}>
                     {" "}
