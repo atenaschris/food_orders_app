@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
+import { Prompt } from "react-router";
 import salmon from "../../images/salmon.jpg";
 import hamburger from "../../images/hamburger.jpg";
 
@@ -26,9 +27,9 @@ const Authform = () => {
   };
 
   const PasswordIsValid = (value) => {
-    const regularExpression =
+    const regularPasswordExpression =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    return value.trim() !== "" && value.match(regularExpression);
+    return value.trim() !== "" && value.match(regularPasswordExpression);
   };
 
   const {
@@ -119,36 +120,13 @@ const Authform = () => {
     formIsValid = true;
   }
   const emailInputErrorMessage =
-    "the email field should not be empty and should contain at least the @ symbhol";
+    "the email field should not be empty and should contain at least the @ symbol";
 
   const passwordInputErrorMessage =
     "the password field should not be empty and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
 
   return (
     <>
-      {/* <Card>
-        <form onSubmit={submitHandler}>
-          {error && <p>{error}</p>}
-          <h2>{login ? " Login" : "Sign Up"}</h2>
-          <div className={classes.control}>
-            <label>Email</label>
-            <input ref={emailRef} />
-          </div>
-          <div className={classes.control}>
-            <label>Password</label>
-            <input ref={passwordRef} />
-          </div>
-          <div className={classes.actions}>
-            {!isLoading && <button>{login ? "Login" : "Sign Up"}</button>}
-            {isLoading && <LoadingSpinner />}
-            <a onClick={switchLoginHandler}>
-              {login
-                ? "create a new account"
-                : "sign up with an existing account"}
-            </a>
-          </div>
-        </form>
-      </Card> */}
       <section className={classes.section}>
         <div className={containerClasses}>
           <div className={`${classes.user} ${classes.signinBx}`}>
@@ -156,8 +134,8 @@ const Authform = () => {
               <img src={salmon} />
             </div>
             <div className={classes.formBx}>
-              {error && <p>{error}</p>}
               <form>
+                {error && <p className={classes.error}>{error}</p>}
                 <h2>Sign In</h2>
 
                 <Input
@@ -172,7 +150,10 @@ const Authform = () => {
                   }}
                 />
                 {emailHasError && (
-                  <ErrorInput message={emailInputErrorMessage} />
+                  <ErrorInput
+                    className={classes["error-message-input"]}
+                    message={emailInputErrorMessage}
+                  />
                 )}
 
                 <Input

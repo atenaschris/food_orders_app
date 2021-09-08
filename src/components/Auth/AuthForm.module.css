@@ -116,7 +116,7 @@
   color: #333;
   outline: 0;
   box-shadow: none;
-  margin: 8px 0 16px 0;
+  margin: 8px 0 8px 0;
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 300;
@@ -127,7 +127,7 @@
   border: 10px solid red !important;
 }
  */
- 
+
 .section .container .user .formBx form input:focus,
 .section .container .user .formBx form input:active {
   background-color: rgb(243, 193, 193);
@@ -171,11 +171,6 @@
 }
 
 .section .container .user .formBx form button:disabled {
-  cursor: not-allowed;
-  background-color: #8b4429;
-  border: 1px solid #220b01;
-}
-.section .container .user .formBx form button:disabled:hover {
   cursor: not-allowed;
   background-color: #8b4429;
   border: 1px solid #220b01;
@@ -265,6 +260,16 @@ section .container.active .signinBx .imgBx {
   .section .container .user .formBx form h2 {
     color: white;
   }
+}
+
+.error{
+  color: red;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.error-message-input{
+  margin: 5px 0 0 0 ;
 }
 
 @media (max-width: 410px) {
