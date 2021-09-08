@@ -142,7 +142,7 @@ const Authform = () => {
         {
           <Prompt
             when={formIsFocused}
-            message={ 
+            message={
               "Are you sure you want to leave the page? All the data will be lost!!!"
             }
           />
@@ -202,7 +202,7 @@ const Authform = () => {
           </div>
           <div className={`${classes.user} ${classes.signupBx}`}>
             <div className={classes.formBx}>
-              <form>
+              <form onSubmit={submitHandler} onFocus={focusFormHandler}>
                 <h2>Create an account</h2>
                 <Input
                   label="Email"
@@ -256,7 +256,6 @@ const Authform = () => {
             </div>
           </div>
         </div>
-        <Link to="/">Go home</Link>
       </section>
     </>
   );
