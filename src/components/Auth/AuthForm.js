@@ -14,9 +14,12 @@ import authContext from "../../store/auth-context";
 import useForm from "../../hooks/use-form";
 import ErrorInput from "../UI/ErrorInput";
 import Input from "../UI/Input";
+import { Link } from "react-router-dom";
 
 const Authform = () => {
   const [login, setLogin] = useState(false);
+
+  const [formIsFocused, setFormIsFocused] = useState(false);
 
   const Authctx = useContext(authContext);
 
@@ -112,6 +115,14 @@ const Authform = () => {
     resetPasswordValue();
   };
 
+  const focusFormHandler = () => {
+    setFormIsFocused(true);
+  };
+
+  const finishEnteringDataHandler = () => {
+    setFormIsFocused(false);
+  };
+
   const containerClasses = `${classes.container} ${
     login ? classes.active : ""
   }`;
@@ -128,13 +139,21 @@ const Authform = () => {
   return (
     <>
       <section className={classes.section}>
+        {
+          <Prompt
+            when={formIsFocused}
+            message={ 
+              "Are you sure you want to leave the page? All the data will be lost!!!"
+            }
+          />
+        }
         <div className={containerClasses}>
           <div className={`${classes.user} ${classes.signinBx}`}>
             <div className={classes.imgBx}>
               <img src={salmon} />
             </div>
             <div className={classes.formBx}>
-              <form>
+              <form onSubmit={submitHandler} onFocus={focusFormHandler}>
                 {error && <p className={classes.error}>{error}</p>}
                 <h2>Sign In</h2>
 
@@ -171,12 +190,7 @@ const Authform = () => {
                   <ErrorInput message={passwordInputErrorMessage} />
                 )}
 
-                {!isLoading && (
-                  <button onClick={submitHandler} disabled={!formIsValid}>
-                    {" "}
-                    Login{" "}
-                  </button>
-                )}
+                {!isLoading && <button disabled={!formIsValid}> Login </button>}
                 {isLoading && <LoadingSpinner />}
 
                 <p className={classes.signup}>
@@ -221,7 +235,10 @@ const Authform = () => {
                   <ErrorInput message={passwordInputErrorMessage} />
                 )}
                 {!isLoading && (
-                  <button onClick={submitHandler} disabled={!formIsValid}>
+                  <button
+                    onClick={finishEnteringDataHandler}
+                    disabled={!formIsValid}
+                  >
                     {" "}
                     SignUp{" "}
                   </button>
@@ -239,6 +256,7 @@ const Authform = () => {
             </div>
           </div>
         </div>
+        <Link to="/">Go home</Link>
       </section>
     </>
   );
