@@ -11,6 +11,7 @@ import AuthPage from "./pages/AuthPage";
 import UserProfile from "./pages/UserProfile";
 import Welcome from "./pages/Welcome";
 import Layout from "./pages/Layout";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const Authctx = useContext(authContext);
@@ -32,9 +33,8 @@ function App() {
           {isLoggedIn && <UserProfile />}
           {!isLoggedIn && <Redirect to="/auth" />}
         </Route>
-
         <Route path="*">
-          <Redirect to="/" />
+          <NotFound />
         </Route>
       </Switch>
     </Layout>
