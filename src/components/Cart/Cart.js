@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 import Checkoutform from "./CheckoutForm";
 import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import ModalContext from "../../store/modal-context";
 
 const Cart = (props) => {
   const [checkoutOpened, setCheckoutOpened] = useState(false);
@@ -13,6 +14,8 @@ const Cart = (props) => {
   const ctx = useContext(CartContext);
   const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
   const hasItems = ctx.items.length > 0;
+
+  const Modalctx = useContext(ModalContext);
 
   const addAmountToFoodHandler = (food) => {
     ctx.addItem({ ...food, amount: 1 });
@@ -27,6 +30,10 @@ const Cart = (props) => {
   const checkOutOpenedHandler = () => {
     setCheckoutOpened(true);
   };
+
+  const hideCartHandler = ()=>{
+    Modalctx.hideCart();
+  }
 
   const fetchUsersItemsHandler = (user) => {
     const applyData = (user) => {
@@ -84,7 +91,7 @@ const Cart = (props) => {
         <div className={classes.actions}>
           <button
             className={classes["button--alt"]}
-            onClick={props.onHideCartHandler}
+            onClick={hideCartHandler}
           >
             Close
           </button>
@@ -104,7 +111,7 @@ const Cart = (props) => {
         <Checkoutform
           error={error}
           onAddUserData={fetchUsersItemsHandler}
-          onClosingCheckoutForm={props.onHideCartHandler}
+          onClosingCheckoutForm={hideCartHandler}
         />
       )}
     </>
@@ -116,7 +123,7 @@ const Cart = (props) => {
     <>
       <p className={classes.success}>Succesfully sent the order!!!</p>
       <div className={classes.actions}>
-        <button onClick={props.onHideCartHandler}>Close</button>
+        <button onClick={hideCartHandler}>Close</button>
       </div>
     </>
   );
@@ -124,7 +131,7 @@ const Cart = (props) => {
   const didSubmitModalContentWithError = <p>{error}</p>;
 
   return (
-    <Modal onHideCartHandler={props.onHideCartHandler}>
+    <Modal>
       {!isLoading && !didSubmit && cartModalContent}
       {isLoading && isSubmittingModalContent}
       {!isLoading && didSubmit && !error && didSubmitModalContent}

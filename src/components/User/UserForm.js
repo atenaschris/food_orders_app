@@ -77,7 +77,7 @@ const UserForm = () => {
   };
 
   const passwordErrorMessage =
-    "the password field should not be empty and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
+    "the password field should not be empty , should have no white spaces and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
   return (
     <Card>
       <Prompt

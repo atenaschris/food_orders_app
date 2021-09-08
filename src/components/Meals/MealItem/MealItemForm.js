@@ -27,7 +27,6 @@ const MealItemForm = (props) => {
         isTouched: true,
       };
     }
-
     return defaultAmountState;
   };
 
@@ -72,7 +71,7 @@ const MealItemForm = (props) => {
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
         className={classes.input}
-        isValid={amountError}
+        hasError={amountError}
         label="Amount"
         input={{
           value: amount,

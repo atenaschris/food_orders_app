@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import reactDom from "react-dom";
 import classes from "./Modal.module.css";
 
+import ModalContext, { ModalContextProvider } from "../../store/modal-context";
+
 const Backdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.onHideCartHandler}></div>;
+  
+  const Modalctx = useContext(ModalContext);
+
+  const hideModalHandler = ()=>{
+    Modalctx.hideCart();
+  }
+
+  return (
+    <div className={classes.backdrop} onClick={hideModalHandler}></div>
+  );
 };
 
 const ModalOverlay = (props) => {
-  return (
-    <div className={classes.modal}>
-      {props.children}
-    </div>
-  );
+  return <div className={classes.modal}>{props.children}</div>;
 };
 
 const portalElement = document.getElementById("overlays");
@@ -19,7 +26,7 @@ const portalElement = document.getElementById("overlays");
 const Modal = (props) => {
   return (
     <>
-      {reactDom.createPortal(<Backdrop onHideCartHandler={props.onHideCartHandler}/>, portalElement)}
+      {reactDom.createPortal(<Backdrop />, portalElement)}
       {reactDom.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         portalElement

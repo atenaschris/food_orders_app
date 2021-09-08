@@ -32,11 +32,16 @@ const Header = (props) => {
           )}
           {isLoggedIn && (
             <li>
-              <a className={classes['logout-anchor-tag']} onClick={logoutHandler}>Logout</a>
+              <a
+                className={classes["logout-anchor-tag"]}
+                onClick={logoutHandler}
+              >
+                Logout
+              </a>
             </li>
           )}
         </ul>
-        <HeaderCartbutton onClick={props.onShowCartHander} />
+        <HeaderCartbutton />
       </header>
 
       <div className={classes["main-image"]}>

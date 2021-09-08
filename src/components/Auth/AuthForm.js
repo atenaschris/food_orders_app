@@ -134,7 +134,7 @@ const Authform = () => {
     "the email field should not be empty and should contain at least the @ symbol";
 
   const passwordInputErrorMessage =
-    "the password field should not be empty and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
+    "the password field should not be empty , should have no white spaces and should have at least one number, one special char, one lower case and uppercase char  and the number of chars should be between 6 and 16";
 
   return (
     <>
@@ -155,11 +155,12 @@ const Authform = () => {
             <div className={classes.formBx}>
               <form onSubmit={submitHandler} onFocus={focusFormHandler}>
                 {error && <p className={classes.error}>{error}</p>}
+
                 <h2>Sign In</h2>
 
                 <Input
                   label="Email"
-                  isValid={emailHasError}
+                  hasError={emailHasError}
                   input={{
                     id: `Email_${Math.random().toString()}`,
                     value: emailValue,
@@ -177,7 +178,7 @@ const Authform = () => {
 
                 <Input
                   label="Password"
-                  isValid={passwordHasError}
+                  hasError={passwordHasError}
                   input={{
                     id: `Password_${Math.random().toString()}`,
                     value: passwordValue,
@@ -206,7 +207,7 @@ const Authform = () => {
                 <h2>Create an account</h2>
                 <Input
                   label="Email"
-                  isValid={emailHasError}
+                  hasError={emailHasError}
                   input={{
                     id: `Email_${Math.random().toString()}`,
                     value: emailValue,
@@ -221,7 +222,7 @@ const Authform = () => {
                 )}
                 <Input
                   label="Password"
-                  isValid={passwordIsValid}
+                  hasError={passwordHasError}
                   input={{
                     id: `Password_${Math.random().toString()}`,
                     value: passwordValue,

@@ -1,54 +1,13 @@
-/* .control {
-  width: 30rem;
-  margin-bottom: 1rem;
-}
 
-.control label {
-  display: block;
-  width: 100%;
-  font-weight: bold;
-}
-
-.control input {
-  display: block;
-  width: 100%;
-}
-
-.actions button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  background-color: transparent;
-  border: 1px solid #844118;
-  cursor: pointer;
-  color: #000000;
-  transition: 0.4s;
-}
-.actions a {
-  display: block;
-  font-size: small;
-  margin-top: 0.5rem;
-  cursor: pointer;
-  color: #844118;
-  transition: 0.5s;
-}
-.actions a:hover {
-  letter-spacing: 2px;
-}
-.actions button:hover,
-.actions button:active {
-  border: 1px solid transparent;
-  color: white;
-  background-color: #844118;
-}
- */
 .section {
   position: relative;
   min-height: 100vh;
-  background: maroon;
+  background: transparent;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -100px;
 }
 .section .container {
   position: relative;
