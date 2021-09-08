@@ -17,7 +17,7 @@ const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-        <h1>ReactMeals</h1>
+        <Link to="/" className={classes.logo}>React Meals</Link>
         <ul>
           {!isLoggedIn && (
             <li>
@@ -41,7 +41,7 @@ const Header = (props) => {
             </li>
           )}
         </ul>
-        <HeaderCartbutton />
+        <HeaderCartbutton onClick={props.onShowCartHander} />
       </header>
 
       <div className={classes["main-image"]}>
